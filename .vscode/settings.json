@@ -1,0 +1,11 @@
+{
+  "solidity.packageDefaultDependenciesContractsDirectory": "src",
+  "solidity.packageDefaultDependenciesDirectory": "lib",
+  "solidity.remappings": [
+    "forge-std/=lib/forge-std/src/",
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+    "@hiero/system-contracts/=lib/hiero-contracts/contracts/"
+  ],
+  "solidity.formatter": "forge",
+  "solidity.compileUsingRemoteVersion": "v0.8.33+commit.64118f21"
+}

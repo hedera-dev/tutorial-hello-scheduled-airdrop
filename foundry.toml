@@ -1,0 +1,12 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+remappings = [
+  "forge-std/=lib/forge-std/src/",
+  "@hiero/system-contracts/=lib/hiero-contracts/contracts/",
+  "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+]
+
+[rpc_endpoints]
+testnet = "${HEDERA_RPC_URL}"

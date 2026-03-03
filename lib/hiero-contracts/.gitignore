@@ -1,0 +1,22 @@
+node_modules
+cache
+.idea
+.env
+test-results.*
+
+# Ignore all default artifacts except for TokenCreateCustomContract, TokenManagementContract, TokenQueryContract, TokenTransferContract, IHRC729Contract, PrngSystemContract, ERC20Mock, ERC721Mock
+# because the System Contract DApp requires the bytecode of these contracts
+artifacts/build-info
+artifacts/contracts/**/**/*.dbg.json
+
+!artifacts/contracts
+artifacts/contracts/*
+!artifacts/contracts/exchange-rate
+!artifacts/contracts/prng
+!artifacts/contracts/token-service
+artifacts/contracts/token-service/*
+!artifacts/contracts/token-service/IHRC719.sol
+
+coverage.json
+coverage
+contracts-abi

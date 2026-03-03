@@ -1,0 +1,65 @@
+{
+  "name": "@hiero-ledger/hiero-contracts",
+  "version": "0.1.0",
+  "description": "Secure Solidity Smart Contract Library for integrations with Hiero Ledger-based system contracts",
+  "files": [
+    "/contracts/**/*.sol",
+    "!/contracts/mocks/**/*"
+  ],
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiero-ledger/hiero-contracts.git"
+  },
+  "author": "2025 Hedera Hashgraph, LLC",
+  "license": "Apache-2.0",
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "evm",
+    "hashgraph",
+    "hedera",
+    "hedera-account-service",
+    "hedera-token-service",
+    "precompiles",
+    "smart-contracts",
+    "system-contracts"
+  ],
+  "bugs": {
+    "url": "https://github.com/hiero-ledger/hiero-contracts/issues"
+  },
+  "homepage": "https://github.com/hiero-ledger/hiero-contracts/#readme",
+  "scripts": {
+    "hh:compile": "hardhat compile",
+    "hh:test": "hardhat test",
+    "prepare": "husky install",
+    "release": "cd ./contracts && npm publish --access public --no-git-tag",
+    "version": "cd ./contracts && npm version"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@hashgraph/hedera-local": "^2.35.0",
+    "@hashgraph/sdk": "^2.70.0",
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^17.2.0",
+    "hardhat": "^3.1.5",
+    "husky": "^9.1.7",
+    "mocha-junit-reporter": "^2.2.0",
+    "mocha-multi-reporters": "^1.5.1",
+    "prettier": "3.6.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "@openzeppelin/contracts-upgradeable": "^5.4.0",
+    "axios": "^1.13.2",
+    "bn.js": "^5.2.2",
+    "dotenv": "^17.2.1",
+    "elliptic": "^6.6.1",
+    "ethers": "^6.16.0",
+    "mcl-wasm": "^2.0.0",
+    "protobufjs": "^7.5.3"
+  }
+}

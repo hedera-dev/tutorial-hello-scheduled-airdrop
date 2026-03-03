@@ -1,0 +1,15 @@
+# Compiler output
+cache/
+out/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+
+# Dependencies (installed via submodules)
+# lib/ is tracked via .gitmodules
+
+# Foundry
+broadcast/
