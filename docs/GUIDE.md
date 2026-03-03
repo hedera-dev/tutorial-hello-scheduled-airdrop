@@ -304,6 +304,7 @@ cast send $CONTRACT_ADDR \
 ```
 
 Parameters:
+
 - `1000000000000000000` = 1 token (18 decimals)
 - `30` = every 30 seconds
 - `10` = stop after 10 drops
@@ -330,20 +331,17 @@ Hedera uses [Sourcify](https://docs.sourcify.dev/) for contract verification. Fo
 
 ### Verify
 
+Run the script to generate the bundles:
+
 ```bash
-forge verify-contract $CONTRACT_ADDR \
-  src/HelloScheduledAirdrop.sol:HelloScheduledAirdrop \
-  --chain-id 296 \
-  --verifier sourcify \
-  --verifier-url https://server-verify.hashscan.io \
-  --constructor-args $(cast abi-encode "constructor(string,string,uint256)" "Workshop Token" "WKSP" 0)
+./generate_hedera_sc_metadata.sh HelloScheduledAirdrop
 ```
 
-Key flags:
-- `--chain-id 296` -- Hedera testnet (295 for mainnet, 297 for previewnet)
-- `--verifier sourcify` -- use the Sourcify verification standard
-- `--verifier-url` -- HashScan's self-hosted Sourcify instance
-- `--constructor-args` -- must exactly match what was used during deployment
+This produces a directory (e.g., verify-bundles/) containing a single metadata.json file for each contract.
+
+Upload the following file to Hashscan's verification page:
+
+- `verify-bundles/HelloScheduledWorld/metadata.json`
 
 ### View on HashScan
 
@@ -381,42 +379,45 @@ This workshop uses just two HSS functions: `scheduleCall()` and `hasScheduleCapa
 
 ### HIP-755: Multi-Party Authorization
 
-| Function | Purpose |
-|----------|---------|
-| `authorizeSchedule(address)` | Contract signs a pending scheduled transaction (programmatic co-signer) |
-| `signSchedule(address, bytes)` | Submit EOA cryptographic signatures for a pending schedule |
+| Function                       | Purpose                                                                 |
+| ------------------------------ | ----------------------------------------------------------------------- |
+| `authorizeSchedule(address)`   | Contract signs a pending scheduled transaction (programmatic co-signer) |
+| `signSchedule(address, bytes)` | Submit EOA cryptographic signatures for a pending schedule              |
 
 **Use cases:**
+
 - **Multi-sig treasury**: 3-of-5 council members must authorize a payment before it executes
 - **Escrow**: Both buyer and seller contracts must approve before funds are released
 - **DAO governance**: Collect approval signatures over time, execute when threshold is met
 
 ### HIP-756: Native Token Scheduling
 
-| Function | Purpose |
-|----------|---------|
-| `scheduleNative(address, bytes, address)` | Schedule HTS operations (token creation, updates) |
-| `getScheduledCreateFungibleTokenInfo(address)` | Query details of a scheduled token creation |
-| `getScheduledCreateNonFungibleTokenInfo(address)` | Query details of a scheduled NFT creation |
+| Function                                          | Purpose                                           |
+| ------------------------------------------------- | ------------------------------------------------- |
+| `scheduleNative(address, bytes, address)`         | Schedule HTS operations (token creation, updates) |
+| `getScheduledCreateFungibleTokenInfo(address)`    | Query details of a scheduled token creation       |
+| `getScheduledCreateNonFungibleTokenInfo(address)` | Query details of a scheduled NFT creation         |
 
 **Supported operations:** `createFungibleToken`, `createNonFungibleToken`, `createFungibleTokenWithCustomFees`, `createNonFungibleTokenWithCustomFees`, `updateToken`
 
 **Use cases:**
+
 - **Token launchpad**: Teams configure parameters and schedule creation for a specific launch date
 - **Automated fee updates**: Periodically update custom fee schedules on tokens
 - **NFT drops**: Schedule NFT collection creation at a specific time
 
 ### HIP-1215: Advanced Scheduling (Beyond scheduleCall)
 
-| Function | Purpose |
-|----------|---------|
-| `scheduleCall(...)` | Schedule a contract call (what we used today) |
-| `scheduleCallWithPayer(...)` | Schedule with a designated gas payer (sponsor execution) |
-| `executeCallOnPayerSignature(...)` | Execute immediately when payer signs (not time-based) |
-| `deleteSchedule(address)` | Cancel a pending scheduled transaction |
-| `hasScheduleCapacity(...)` | Check if a time slot has room (what we used today) |
+| Function                           | Purpose                                                  |
+| ---------------------------------- | -------------------------------------------------------- |
+| `scheduleCall(...)`                | Schedule a contract call (what we used today)            |
+| `scheduleCallWithPayer(...)`       | Schedule with a designated gas payer (sponsor execution) |
+| `executeCallOnPayerSignature(...)` | Execute immediately when payer signs (not time-based)    |
+| `deleteSchedule(address)`          | Cancel a pending scheduled transaction                   |
+| `hasScheduleCapacity(...)`         | Check if a time slot has room (what we used today)       |
 
 **Use cases:**
+
 - **Sponsored execution**: Protocol treasury pays gas for user-initiated scheduled actions
 - **Approval-gated workflows**: Scheduled action executes instantly when the approver signs
 - **Cancellation flows**: Schedule a payment with the ability to cancel before execution
@@ -447,6 +448,7 @@ lib/hiero-contracts/contracts/schedule-service/
 ```
 
 **Further reading:**
+
 - [HIP-755](https://hips.hedera.com/hip/hip-755) -- Schedule Service system contract
 - [HIP-756](https://hips.hedera.com/hip/hip-756) -- Scheduling native system contract operations
 - [HIP-1215](https://hips.hedera.com/hip/hip-1215) -- Generalized scheduled contract calls

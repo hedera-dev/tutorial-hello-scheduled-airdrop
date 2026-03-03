@@ -13,3 +13,6 @@ out/
 
 # Foundry
 broadcast/
+
+# Verification
+verify-bundles/
