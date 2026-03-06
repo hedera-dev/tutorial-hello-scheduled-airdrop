@@ -298,8 +298,8 @@ cast call $CONTRACT_ADDR "getRecipients()" --rpc-url $HEDERA_RPC_URL
 
 ```bash
 cast send $CONTRACT_ADDR \
-  "startAirdrop(uint256,uint256,uint256,string)" \
-  1000000000000000000 30 10 "Hello from the future!" \
+  'startAirdrop(uint256,uint256,uint256,string)' \
+  1000000000000000000 30 10 'Hello from the future!' \
   --rpc-url $HEDERA_RPC_URL --private-key $HEDERA_PRIVATE_KEY
 ```
 
@@ -326,8 +326,6 @@ cast send $CONTRACT_ADDR "stopAirdrop()" \
 ## Verifying the Contract on HashScan
 
 Verifying your contract makes the source code visible on HashScan, allowing anyone to read and audit it.
-
-Hedera uses [Sourcify](https://docs.sourcify.dev/) for contract verification. Foundry has built-in support via the `forge verify-contract` command.
 
 ### Verify
 
